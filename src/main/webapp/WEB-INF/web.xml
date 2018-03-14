@@ -14,7 +14,7 @@
 	    </servlet-class>
 	    <init-param>
 			<param-name>contextConfigLocation</param-name>
-		    <param-value>classpath:springmvc-config.xml</param-value>
+		    <param-value>classpath:ssh-mvc.xml</param-value>
 	    </init-param>
 	    <load-on-startup>1</load-on-startup>
   	</servlet>
@@ -24,6 +24,17 @@
 	    <servlet-name>springmvc</servlet-name>
 	    <url-pattern>/</url-pattern>
   	</servlet-mapping>
+  	
+  	<!--加载Spring的配置文件到上下文中去-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    
+    <!-- Spring监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
   	<!-- 编码过滤器 -->
   	<filter>
