@@ -41,8 +41,8 @@ public class PersonRepositoryImpl implements PersonRepository {
         getCurrentSession().persist(entity);
     }
 
-    public int save(Person entity) {
-        return (int) getCurrentSession().save(entity);
+    public Long save(Person entity) {
+        return ((Number) getCurrentSession().save(entity)).longValue();
     }
 
     public void saveOrUpdate(Person entity) {

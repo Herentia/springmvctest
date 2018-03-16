@@ -22,6 +22,7 @@ public class FileUploadController {
 	@RequestMapping(value="/{formName}")
 	public String loginForm(@PathVariable String formName) {
 		//¶¯Ì¬Ìø×ªÒ³Ãæ
+		System.out.println("²âÊÔ");
 		return formName;
 	}
 	

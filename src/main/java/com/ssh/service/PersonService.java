@@ -6,6 +6,6 @@ import com.ssh.entity.Person;
 
 public interface PersonService {
 	
-	int savePerson(Person person);
+	Long savePerson(Person person);
 
 }

@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by XRog
- * On 2/2/2017.2:28 PM
+ * 
+ * @author haohan
+ *
+ * @param <T>
+ * @param <PK>
  */
 public interface DomainRepository<T,PK extends Serializable>{
     T load(PK id);
@@ -16,7 +19,7 @@ public interface DomainRepository<T,PK extends Serializable>{
 
     void persist(T entity);
 
-    int save(T entity);
+    Long save(T entity);
 
     void saveOrUpdate(T entity);
 

@@ -20,7 +20,7 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
-    public int savePerson(Person person) {
+    public Long savePerson(Person person) {
         return personRepository.save(person);
     }
 
