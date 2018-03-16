@@ -1,4 +1,4 @@
-package com.pb.test;
+package com.pb.test1;
 
 public class singletonTest {
 	

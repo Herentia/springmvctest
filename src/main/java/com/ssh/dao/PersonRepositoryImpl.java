@@ -1,62 +1,60 @@
 package com.ssh.dao;
 
-import java.util.List;
+import com.ssh.entity.Person;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.ssh.entity.Person;
+import java.util.List;
 
+/**
+ * 
+ * @author haohan
+ *
+ */
 @Repository
 public class PersonRepositoryImpl implements PersonRepository {
-	
-	@Autowired
-	private SessionFactory sessionfactory;
-	
-	private Session getSession() {
-		return sessionfactory.getCurrentSession();
-	}
 
-	@Override
-	public Person load(Long id) {
-		return (Person) getSession().load(Person.class, id);
-	}
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Override
-	public Person get(Long id) {
-		return (Person) getSession().get(Person.class, id);
-	}
+    private Session getCurrentSession() {
+        return this.sessionFactory.getCurrentSession();
+    }
 
-	@Override
-	public List<Person> findAll() {
-		return null;
-	}
+    public Person load(Long id) {
+        return (Person)getCurrentSession().load(Person.class,id);
+    }
 
-	@Override
-	public void persist(Person entity) {
-		getSession().persist(entity);
-	}
+    public Person get(Long id) {
+        return (Person)getCurrentSession().get(Person.class,id);
+    }
 
-	@Override
-	public Long save(Person entity) {
-		return (Long) getSession().save(entity);
-	}
+    public List<Person> findAll() {
+        return null;
+    }
 
-	@Override
-	public void saveOrUpdate(Person entity) {
-		getSession().saveOrUpdate(entity);
-	}
+    public void persist(Person entity) {
+        getCurrentSession().persist(entity);
+    }
 
-	@Override
-	public void delete(Long id) {
-		getSession().delete(id);
-	}
+    public int save(Person entity) {
+        return (int) getCurrentSession().save(entity);
+    }
 
-	@Override
-	public void flush() {
-		getSession().flush();
-	}
+    public void saveOrUpdate(Person entity) {
+        getCurrentSession().saveOrUpdate(entity);
+    }
 
+    public void delete(Long id) {
+        Person person = load(id);
+        getCurrentSession().delete(person);
+    }
+
+    public void flush() {
+        getCurrentSession().flush();
+    }
 }
