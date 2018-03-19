@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/pb/util/CharacterEncodingFilter.java=UTF-8
 encoding//src/main/webapp/WEB-INF/content/fastjsontest.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/success.jsp=UTF-8

@@ -104,5 +104,14 @@ public class MainController {
 	/**
 	 * ---@ModelAttribute若没有则将URI template中的值按对应的名称绑定到Pet对象的各属性上
 	 */
+	
+	/**
+	 * 重定向
+	 */
+	@RequestMapping("/redirectTest")
+	public String redirectTest() {
+		System.out.println("redirectTest....");
+		return "redirect:/index.jsp";
+	}
 
 }

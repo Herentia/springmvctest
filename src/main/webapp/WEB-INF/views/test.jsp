@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h2 style="color: #ff261a">this is my test page!!!</h2>
+	<a href="redirectTest">redirectTest</a>
 </body>
 </html>
