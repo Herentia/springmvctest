@@ -9,5 +9,8 @@
 <body>
 <p>恭喜成功！！！</p>
 ${requestScope.message}
+<a href="download?filename=${requestScope.user.image.originalFilename }">
+	${requestScope.user.image.originalFilename }
+</a>
 </body>
 </html>

@@ -88,6 +88,11 @@
         <artifactId>hibernate-jpa-2.1-api</artifactId>
         <version>1.0.0.Draft-16</version>
     </dependency>
+    <dependency>  
+	    <groupId>org.hibernate</groupId>  
+	    <artifactId>hibernate-validator</artifactId>  
+	    <version>5.1.3.Final</version>  
+	</dependency>  
     <!-- hibernate 缓存, 视情况添加-->
     <dependency>
       <groupId>org.hibernate</groupId>
