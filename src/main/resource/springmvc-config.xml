@@ -20,7 +20,9 @@
      <!-- 启用默认配置 -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
+        	<!-- 
         	<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+        	 -->
             <!-- 配置Fastjson支持 -->
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
@@ -35,6 +37,12 @@
 
     <!-- 访问静态资源 -->
     <mvc:default-servlet-handler />
+    
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+    	<!-- 配置自定义拦截器 -->
+    	<bean class="com.ssh.interceptor.FirstInterceptor"></bean>
+    </mvc:interceptors>
     
     <!-- 使用fastjson来返回json数据 -->
     <!-- 

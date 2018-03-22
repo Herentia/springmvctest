@@ -12,7 +12,20 @@
 <p>测试json</p>
 <button id="ceshi" name="dianjiwo" onclick="getjson()">点我</button>
 
+<a href="getpersonjson" id="getjson">点击我！！！</a>
+
 <script type="text/javascript">
+
+	$("#getjson").click(function() {
+		var url = "getpersonjson";
+		var args = {};
+		$.post(url, args, function(data) {
+			//var data = eval('(' + data + ')');
+			console.log(data.name + "---" + data.age);
+		}, "json");
+		return false;
+	})
+
 	function getjson() {
 		$.ajax({
 			url: "testrequestbody",
@@ -23,7 +36,7 @@
 				Accept: "application/json"
 			},
 			success: function(data, textStatus) {
-				console.log(data);
+				console.log(data+ ":" + data.name + "----" + data.age);
 			},
 			error: function(data, textStatus, errorThrown) {
 				console.log(data);

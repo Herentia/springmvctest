@@ -60,7 +60,10 @@ public class MainController {
 	@ResponseBody
 	public Person testRequestBody(@RequestBody Person p) {
 		System.out.println("asdsad---" + p);
-		return p;
+		Person p1 = new Person();
+		p1.setName("ceshi");
+		p1.setAge(18);
+		return p1;
 	}
 	
 	/**
