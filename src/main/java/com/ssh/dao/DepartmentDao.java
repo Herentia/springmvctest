@@ -30,4 +30,11 @@ public class DepartmentDao {
 		return departments.get(id);
 	}
 
+	public DepartmentDao() {
+		super();
+		System.out.println("department±»´´½¨¡£¡£¡£¡£");
+	}
+	
+	
+
 }

@@ -61,7 +61,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
      -->
      
-     <!-- 配置事务 -->
+    <!-- 配置事务 -->
 	<tx:advice id="mytx" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED"/>

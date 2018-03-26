@@ -48,4 +48,11 @@ public class EmployeeDao {
 		employees.remove(id);
 	}
 
+	public EmployeeDao() {
+		super();
+		System.out.println("employee±»´´½¨....");
+	}
+	
+	
+
 }

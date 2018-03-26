@@ -39,7 +39,7 @@ public class EmployeeHandler {
 		map.put("employee", new Employee());
 		return "input";
 	}
-	//增加员工
+	//增加员工也可以用BindingResult来接收错误，BindingResult继承Errors
 	@RequestMapping(value="/emp", method=RequestMethod.POST)
 	public String add(@Valid Employee employee, Errors errors, Map<String, Object> map) {
 		System.out.println("save    " + employee.getDepartment().getDepartmentname() + "---" + employee.getDepartment().getId());
@@ -83,6 +83,12 @@ public class EmployeeHandler {
 		if(id != null) {
 			map.put("employee", employeeDao.get(id));
 		}
+	}
+	
+	@RequestMapping("testConversionServiceConver")
+	public String testConverter(@RequestParam("employee") Employee employee) {
+		employeeDao.save(employee);
+		return "redirect:/emps";
 	}
 	
 

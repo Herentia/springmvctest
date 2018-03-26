@@ -12,6 +12,12 @@
 </head>
 <body>
 
+<form action="testConversionServiceConver" meth="post">
+	<!-- 格式：lastname-email-gender-department.id -->
+	Employee: <input type="text" name="employee" />
+	<input type="submit" value="Submit" />
+</form>
+
 <s:form action="${pageContext.request.contextPath }/emp" method="post" modelAttribute="employee">
 	<c:if test="${employee.id == null }">
 		<!-- path 属性对应 html 表单标签的 name 属性值 -->
@@ -36,6 +42,9 @@
 	<br/>
 	Department: <s:select path="department.id" items="${departments }" itemLabel="departmentname" itemValue="id"></s:select>
 	<br/>
+	<!-- 1、数据类型转换问题 2、数据类型格式化 3、数据校验 -->
+	Birth: <s:input path="birth"/>
+	<s:errors path="birth" cssStyle="color: red"></s:errors>
 	<input type="submit" value="Submit" />
 </s:form>
 
