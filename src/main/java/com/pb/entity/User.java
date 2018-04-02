@@ -2,6 +2,8 @@ package com.pb.entity;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 public class User implements Serializable {

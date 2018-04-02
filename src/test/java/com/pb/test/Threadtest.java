@@ -51,7 +51,7 @@ class outputter {
 		lock.lock();
 		try {
 			for(int i = 0; i < name.length(); i++) {
-				System.out.print(name.charAt(i));
+				System.out.print(name.charAt(i) + "---");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,6 +62,11 @@ class outputter {
 	}
 }
 
+/**
+ * 读写锁---读操作锁时可以允许多个线程同时访问，使用写操作锁时只允许一个线程进行
+ * @author haohan
+ *
+ */
 class DataTest {
 	//共享的数据
 	private int data;

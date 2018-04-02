@@ -1,5 +1,8 @@
 package com.pb.test;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class WaitNotify {
 	
 	class Resource{
@@ -8,7 +11,7 @@ public class WaitNotify {
 		private boolean flag = false;
 		public synchronized void set(String name){  
 	        if(flag)  
-	            try{wait();}catch(Exception e){}  
+	        	try{wait();}catch(Exception e){}  
 	        this.name=name+"---"+count++;  
 	        System.out.println(Thread.currentThread().getName()+"...生产者..."+this.name);  
 	        flag=true;  
@@ -16,7 +19,7 @@ public class WaitNotify {
 	    }  
 	    public synchronized void out(){  
 	        if(!flag)  
-	            try{wait();}catch(Exception e){}  
+	        	try{wait();}catch(Exception e){}  
 	        System.out.println(Thread.currentThread().getName()+"...消费者..."+this.name);  
 	        flag=false;  
 	        this.notify();  

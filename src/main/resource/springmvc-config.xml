@@ -72,7 +72,7 @@
         </property>
     </bean>
     
-   <bean id="multipartResolver"  
+   <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <!-- 上传文件大小上限，单位为字节（10MB） -->
         <property name="maxUploadSize">  

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 引入数据源配置文件 -->
+	<properties resource="dbconf.properties" />
+	
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- 默认为OTHER，Oracle不支持为null时值是other -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 环境， mybatis可以配置多种环境，default指定环境来切换环境，可以达到快速切换环境
+			environment，配置一个具体环境信息，id代表环境的唯一标识；必须包含2个标签
+			transactionManager:事务管理器类型；type: JDBC\MANAGED
+								自定义事务管理器：实现TranactionFactory接口，type指定为全类名
+			dataSource: 数据源;   自定义数据源，实现DataSourceFactory接口
+	 -->
+  	<environments default="development">
+    	<environment id="development">
+      	<transactionManager type="JDBC"/>
+      	<dataSource type="POOLED">
+        	<property name="driver" value="${jdbc.driver}"/>
+        	<property name="url" value="${jdbc.url}"/>
+        	<property name="username" value="${jdbc.username}"/>
+        	<property name="password" value="${jdbc.password}"/>
+      	</dataSource>
+    	</environment>
+  	</environments>
+  	
+  	<!-- databaseldProvider：支持多数据库厂商 -->
+  	<databaseIdProvider type="DB_VENDOR">
+  		<property name="Oracle" value="oracle"/>
+  		<property name="MySql" value="mysql"/>
+  	</databaseIdProvider>
+  	
+  	<!-- 将sql映射文件注册到全局配置文件中 resource：引用类路径下的资源；url：引用网络路径或者磁盘路径 -->
+  	<mappers>
+    	<mapper resource="com/pb/mapper/HeroMapper.xml"/>
+  	</mappers>
+</configuration>

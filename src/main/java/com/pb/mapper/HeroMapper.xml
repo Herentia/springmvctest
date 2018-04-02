@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.pb.mybaits.dao.HeroDao">
+  	<select id="getHeroById" resultType="com.pb.mybaits.bean.Hero" databaseId="oracle">
+    	select * from Hero where id = #{id}
+  	</select>
+  	
+  	<insert id="addHero" parameterType="com.pb.mybaits.bean.Hero">
+  		<!-- 将查出的主键封装给id -->
+  		<selectKey order="BEFORE" keyProperty="id" resultType="Integer">
+  			select hero_sq.nextval from dual
+  		</selectKey>
+  		insert into hero (id, heroname, camp, sex, professiontype) 
+  			values(#{id}, #{heroName}, #{camp}, #{sex}, #{professiontype})
+  	</insert>
+  	
+  	<update id="updateHeroById" parameterType="com.pb.mybaits.bean.Hero">
+  		update hero
+  			set heroname = #{heroName}, camp = #{camp}, sex = #{sex}, professiontype = #{professiontype}
+  			where id = #{id}
+  	</update>
+  	
+  	<delete id="delHero">
+  		delete from hero where id = #{id}
+  	</delete>
+  	
+  	<select id="getListByCamp" resultType="com.pb.mybaits.bean.Hero">
+  		select * from Hero where camp like #{camp}
+  	</select>
+  	
+  	<select id="getHeroByReturnMap" resultType="map">
+  		select * from hero where id = #{id}
+  	</select>
+  	
+  	<select id="getHeroByHeroNameReturnMap" resultType="com.pb.mybaits.bean.Hero">
+  		select * from hero where heroname like #{heroname}
+  	</select>
+  	
+</mapper>
