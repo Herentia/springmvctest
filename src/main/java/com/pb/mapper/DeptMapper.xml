@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.pb.mybaits.dao.DepartmentDao">
+	<select id="getDeptById" resultType="com.pb.mybaits.bean.Department">
+		select deptno, dname from dept where deptno = #{deptno}
+	</select>
+	
+	<!-- 嵌套结果集的方式， 使用collection标签定义关联的集合类型的属性的封装规则 -->
+	<resultMap type="com.pb.mybaits.bean.Department" id="myDept">
+		<id column="deptno" property="deptno" />
+		<result column="dname" property="dname"/>
+		<!-- collection定义集合属性的封装规则 -->
+		<collection property="employees" ofType="com.pb.mybaits.bean.Employee">
+			<!-- 定义集合中的元素封装规则 -->
+			<id column="empno" property="empno"/>
+			<result column="ename" property="ename"/>
+			<result column="job" property="job"/>
+			<result column="mgr" property="mgr"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 查询一个部门时返回所有的该部门下的员工 -->
+	<select id="getDeptByIdPlus" resultMap="myDept">
+		select d.deptno, d.dname, e.empno, e.ename, e.job, e.mgr 
+			from dept d 
+			left join emp e 
+			on d.deptno = e.deptno where d.deptno = #{deptno}
+	</select>
+	
+	<!-- discriminator鉴别器:可以使用discriminator判断某列的值，然后根据某列的值改变封装行为
+			例如：如果查出是女生，就把部门信息查询出来，否则不查询
+				  如果查出是男生，就把last_name这一列的值赋给Email
+			column  ：指定判断的列名
+			javaType: 列值对应的java类型
+	 -->
+	<resultMap type="com.pb.mybaits.bean.Department" id="myDeptStep">
+		<id column="deptno" property="deptno" />
+		<result column="dname" property="dname"/>
+		<!-- 多列的值传递，将值封装成map：column="{key1=val1, key2=val2}", 
+			fetchType="lazy":表示使用延时加载， “eager”，立即查询 -->
+		<collection property="employees" select="com.pb.mybaits.dao.EmployeeDao.getEmpsById"
+			column="deptno">
+		</collection>
+	</resultMap>
+	
+	<select id="getDeptByIdStep" resultMap="myDeptStep">
+		select deptno, dname from dept where deptno = #{deptno}
+	</select>
+	
+	 
+	 
+	
+</mapper>

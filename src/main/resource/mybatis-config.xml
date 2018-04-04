@@ -5,12 +5,16 @@
 <configuration>
 
 	<!-- 引入数据源配置文件 -->
-	<properties resource="dbconf.properties" />
+	<properties resource="dbconf.properties"/>
 	
 	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		<!-- 默认为OTHER，Oracle不支持为null时值是other -->
 		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!-- 开启懒加载 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
 	</settings>
 	
 	<!-- 环境， mybatis可以配置多种环境，default指定环境来切换环境，可以达到快速切换环境
@@ -40,5 +44,7 @@
   	<!-- 将sql映射文件注册到全局配置文件中 resource：引用类路径下的资源；url：引用网络路径或者磁盘路径 -->
   	<mappers>
     	<mapper resource="com/pb/mapper/HeroMapper.xml"/>
+    	<mapper resource="com/pb/mapper/EmployeeMapper.xml"/>
+    	<mapper resource="com/pb/mapper/DeptMapper.xml"/>
   	</mappers>
 </configuration>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pb.mybaits.dao.EmployeeDao">
+
+	<!-- 联合查询，级联属性封装结果集 -->
+	<resultMap type="com.pb.mybaits.bean.Employee" id="myEmp">
+		<id column="empno" property="empno" />
+		<result column="ename" property="ename"/>
+		<result column="job" property="job"/>
+		<result column="mgr" property="mgr"/>
+		<result column="deptno" property="department.deptno"/>
+		<result column="dname" property="department.dname"/>
+	</resultMap>
+	
+	<resultMap type="com.pb.mybaits.bean.Employee" id="myEmp2">
+		<id column="empno" property="empno" />
+		<result column="ename" property="ename"/>
+		<result column="job" property="job"/>
+		<result column="mgr" property="mgr"/>
+		<!-- association可以指定联合Javabean对象
+			property="department":指定哪个属性是联合对象
+			javaType= : 指定这个属性对象的类型
+		 -->
+		<association property="department" javaType="com.pb.mybaits.bean.Department">
+			<id column="deptno" property="deptno"/>
+			<result column="dname" property="dname"/>
+		</association>
+	</resultMap>
+
+	<select id="getEmpAndDept" resultMap="myEmp2">
+		select e.empno, e.ename, e.job, e.mgr, d.deptno, d.dname from emp e inner join dept d 
+			on e.deptno = d.deptno and e.empno = #{empno}
+	</select>
+	
+	<!-- 使用association进行分步查询 -->
+	<resultMap type="com.pb.mybaits.bean.Employee" id="myEmp3">
+		<id column="empno" property="empno" />
+		<result column="ename" property="ename"/>
+		<result column="job" property="job"/>
+		<result column="mgr" property="mgr"/>
+		<association property="department"
+			 select="com.pb.mybaits.dao.DepartmentDao.getDeptById" column="deptno">
+		</association>
+	</resultMap>
+	
+	<select id="getEmpByIdStep" resultMap="myEmp3">
+		select * from emp where empno = #{empno}
+	</select>
+	
+	<!-- 根据部门id查询该部门下的所有员工 -->
+	<select id="getEmpsById" resultType="com.pb.mybaits.bean.Employee">
+		select * from emp where deptno = #{deptno}
+	</select>
+	
+	<select id="getEmpForEach" resultType="com.pb.mybaits.bean.Employee">
+		select * from emp where empno in
+		<foreach collection="ids" item="ids" index="index" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</select>
+	
+	<insert id="addEmp">
+		insert into emp(empno, ename, job, mgr, deptno) 
+			values (#{empno}, #{ename}, #{job}, #{mgr}, #{department.deptno})
+	</insert>
+	
+	<!-- 批量插入多条数据 -->
+	<insert id="addEmps">
+		insert all into emp(empno, ename, job, mgr, deptno)
+		<foreach collection="emps" item="emp" separator="union all">
+			(select #{emp.empno}, #{emp.ename}, #{emp.job}, #{emp.mgr}, #{emp.department.deptno} from dual)
+		</foreach>
+	</insert>
+
+</mapper>

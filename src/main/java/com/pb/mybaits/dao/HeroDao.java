@@ -21,7 +21,7 @@ public interface HeroDao {
 	//返回一条map：key就是列名， 值就是对应的值
 	public Map<String, Object> getHeroByReturnMap(int id);
 	//返回多条map：key就是主键，值就是每条记录的值
-	@MapKey("id")
+	@MapKey("id")//告诉mybatis封装这个map的时候使用哪个属性作为map的key
 	public Map<Integer, Hero> getHeroByHeroNameReturnMap(String heroname);
 
 }

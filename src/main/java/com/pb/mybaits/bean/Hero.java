@@ -1,5 +1,8 @@
 package com.pb.mybaits.bean;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("hero")//±ğÃû
 public class Hero {
 	
 	private Integer id;

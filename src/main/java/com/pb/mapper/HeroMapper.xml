@@ -4,6 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.pb.mybaits.dao.HeroDao">
+
+	<!-- 自定义结果映射 -->
+	<resultMap id="userResultMap" type="com.pb.mybaits.bean.Hero">
+    	<id property="id" column="id" />
+    	<result property="heroName" column="heroName"/>
+    	<result property="camp" column="camp"/>
+    	<result column="sex" property="sex"/>
+    	<result column="professiontype" property="professiontype"/>
+	</resultMap>
+
   	<select id="getHeroById" resultType="com.pb.mybaits.bean.Hero" databaseId="oracle">
     	select * from Hero where id = #{id}
   	</select>
