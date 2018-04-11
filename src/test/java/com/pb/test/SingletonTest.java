@@ -12,7 +12,7 @@ public class SingletonTest {
 /**
  * 懒汉
  * @author haohan
- *
+ * 非线程安全，在获取方法上加上synchronized，同步后线程安全
  */
 class Singleton {
 	private static Singleton instance;
@@ -32,7 +32,7 @@ class Singleton {
 /**
  * 饿汉
  * @author haohan
- *
+ * 线程安全的
  */
 class Singleton1 {
 
@@ -48,7 +48,32 @@ class Singleton1 {
 }
 
 /**
+ * 双检查锁机制
+ * @author haohan
+ * 线程安全（推荐）
+ */
+class MySingleton {
+	
+	private static volatile MySingleton instance = null;
+	
+	private MySingleton(){}
+	
+	public MySingleton getInstance() {
+		if(instance == null) {//懒汉模式
+			synchronized (MySingleton.class) {
+				if(instance == null) {//二次检查
+					instance = new MySingleton();
+				}
+			}
+		}
+		return instance;
+	}
+	
+}
+
+/**
  * 内部类
+ * 线程安全
 */
 class Singleton2 {
 	private Singleton2() {

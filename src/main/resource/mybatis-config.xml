@@ -15,6 +15,8 @@
 		<!-- 开启懒加载 -->
 		<setting name="lazyLoadingEnabled" value="true"/>
 		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启全局 二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
 	</settings>
 	
 	<!-- 环境， mybatis可以配置多种环境，default指定环境来切换环境，可以达到快速切换环境

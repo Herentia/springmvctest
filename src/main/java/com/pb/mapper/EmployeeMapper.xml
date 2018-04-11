@@ -68,11 +68,16 @@
 	</insert>
 	
 	<!-- 批量插入多条数据 -->
+	<!-- select into emp(empno, ename, job, mgr, deptno)
+		select emp.nextval, ename, job, mgr, deptno from (
+		select #{emp.empno}, #{emp.ename}, #{emp.job}, #{emp.mgr}, #{emp.department.deptno} from dual) -->
 	<insert id="addEmps">
 		insert all into emp(empno, ename, job, mgr, deptno)
 		<foreach collection="emps" item="emp" separator="union all">
 			(select #{emp.empno}, #{emp.ename}, #{emp.job}, #{emp.mgr}, #{emp.department.deptno} from dual)
 		</foreach>
 	</insert>
+	
+	
 
 </mapper>

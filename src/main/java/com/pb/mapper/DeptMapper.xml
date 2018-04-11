@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.pb.mybaits.dao.DepartmentDao">
+
+	<!-- eviction:缓存回收策略; flushInterval:缓存刷新间隔时间; readOnly:是否只读;
+		 size: 缓存能放多少元素; type:指定自定义缓存的全类名 -->
+	<cache></cache>
+
 	<select id="getDeptById" resultType="com.pb.mybaits.bean.Department">
 		select deptno, dname from dept where deptno = #{deptno}
 	</select>
@@ -50,7 +55,30 @@
 		select deptno, dname from dept where deptno = #{deptno}
 	</select>
 	
+	 <!-- mybatis内置属性  _parameter和_databaseId 
+	 		_parameter:代表整个参数
+                                      单个参数：_parameter就是这个参数
+                                      多个参数：参数会被封装为一个map:_parameter就是代表这个map             
+            _databaseId:如果配置了databaseIdProvider标签
+	 -->
+	 <select id="getDeptInner" resultMap="myDeptStep">
+	 	<if test="_databaseId == 'oracle'">
+	 		select 
+	 		<include refid="deptColumn">
+	 		</include> 
+	 		from dept
+	 		<if test="_parameter != null">
+	 			where deptno = #{_parameter}
+	 		</if>
+	 	</if>
+	 </select>
 	 
+	 <!-- 
+	 	抽取可常用的sql片段，方便后面引用
+	  -->
+	 <sql id="deptColumn">
+	 	deptno, dname
+	 </sql>
 	 
 	
 </mapper>

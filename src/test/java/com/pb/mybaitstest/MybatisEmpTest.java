@@ -39,15 +39,16 @@ public class MybatisEmpTest {
 //			System.out.println(employee + "---" + employee.getDepartment());
 //			Employee employee = ed.getEmpByIdStep(7499);
 //			System.out.println(employee.getEname());
-//			List<Employee> emps = ed.getEmpForEach(Arrays.asList(1, 2, 3));
-//			for (Employee employee : emps) {
-//				System.out.println(employee);
-//			}
-			List<Employee> emps = new ArrayList<Employee>();
+			List<Employee> emps = ed.getEmpForEach(Arrays.asList(1, 2, 3));
+			for (Employee employee : emps) {
+				System.out.println(employee);
+			}
+			
+//			List<Employee> emps = new ArrayList<Employee>();
 //			emps.add(new Employee(1, "jay", "musicman", 8888, new Department(10)));
-			emps.add(new Employee(2, "jion", "musicgril", 8888, new Department(10)));
-			emps.add(new Employee(3, "lihong", "musicman", 8888, new Department(10)));
-			ed.addEmps(emps);
+//			emps.add(new Employee(2, "jion", "musicgril", 8888, new Department(10)));
+//			emps.add(new Employee(3, "lihong", "musicman", 8888, new Department(10)));
+//			ed.addEmps(emps);
 //			Employee emp = new Employee(1, "jay", "musicman", 8888, new Department(10));
 //			ed.addEmp(emp);
 			session.commit();
@@ -68,10 +69,17 @@ public class MybatisEmpTest {
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			session = sqlSessionFactory.openSession();
 			DepartmentDao dd = session.getMapper(DepartmentDao.class);
+			//查询dept关联集合
 //			Department dept = dd.getDeptByIdPlus(10);
 			//分步式通过部门获取该部门下的员工
-			Department dept = dd.getDeptByIdStep(10);
+//			Department dept = dd.getDeptByIdStep(10);
+//			System.out.println(dept.getDname());
+//			System.out.println(dept.getEmployees());
+			//使用mybatis内置的参数_parameter、_databaseId来进行判断查询
+			Department dept = dd.getDeptInner(10);
+			Department dept2 = dd.getDeptInner(10);
 			System.out.println(dept.getDname());
+			System.out.println(dept2.getDname());
 			session.commit();
 		} catch (IOException e) {
 			e.printStackTrace();

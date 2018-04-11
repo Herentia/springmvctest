@@ -1,6 +1,8 @@
 package com.pb.mybaits.bean;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
 	
 	private Integer empno;
 	private String ename;

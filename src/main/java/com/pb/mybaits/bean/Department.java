@@ -1,8 +1,9 @@
 package com.pb.mybaits.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Department {
+public class Department implements Serializable {
 	
 	private Integer deptno;
 	private String dname;
