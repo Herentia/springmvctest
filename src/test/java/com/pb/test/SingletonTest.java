@@ -58,7 +58,7 @@ class MySingleton {
 	
 	private MySingleton(){}
 	
-	public MySingleton getInstance() {
+	public static MySingleton getInstance() {
 		if(instance == null) {//懒汉模式
 			synchronized (MySingleton.class) {
 				if(instance == null) {//二次检查
