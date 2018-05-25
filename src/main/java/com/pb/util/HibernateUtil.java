@@ -1,7 +1,10 @@
 package com.pb.util;
 
 import org.hibernate.*;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.*;
+import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil
 {
@@ -15,7 +18,10 @@ public class HibernateUtil
 			Configuration configuration = new Configuration()
 				.configure();
 			//由Configuration的实例来创建一个SessionFactory实例
-			sessionFactory = configuration.buildSessionFactory();
+//			sessionFactory = configuration.buildSessionFactory();
+			ServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.applySettings(configuration.getProperties()).build();
+			sessionFactory = configuration.buildSessionFactory(registry);
 		}
 		catch (Throwable ex)
 		{

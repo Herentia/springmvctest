@@ -39,16 +39,25 @@ public class MybatisEmpTest {
 //			System.out.println(employee + "---" + employee.getDepartment());
 //			Employee employee = ed.getEmpByIdStep(7499);
 //			System.out.println(employee.getEname());
-			List<Employee> emps = ed.getEmpForEach(Arrays.asList(1, 2, 3));
-			for (Employee employee : emps) {
-				System.out.println(employee);
-			}
+			//同时查询多条员工信息
+//			List<Employee> emps = ed.getEmpForEach(Arrays.asList(1, 2, 3));
+//			for (Employee employee : emps) {
+//				System.out.println(employee);
+//			}
 			
-//			List<Employee> emps = new ArrayList<Employee>();
+			//批量插入
+			List<Employee> emps = new ArrayList<Employee>();
 //			emps.add(new Employee(1, "jay", "musicman", 8888, new Department(10)));
 //			emps.add(new Employee(2, "jion", "musicgril", 8888, new Department(10)));
 //			emps.add(new Employee(3, "lihong", "musicman", 8888, new Department(10)));
-//			ed.addEmps(emps);
+			for(int i = 0 ; i < 10000; i++) {
+				emps.add(new Employee(i, "aaa", "bbb", 9999, new Department(10)));
+			}
+			long start = System.currentTimeMillis();
+			ed.addEmps(emps);
+			System.out.println(System.currentTimeMillis() - start);
+			
+			//单条数据插入
 //			Employee emp = new Employee(1, "jay", "musicman", 8888, new Department(10));
 //			ed.addEmp(emp);
 			session.commit();
